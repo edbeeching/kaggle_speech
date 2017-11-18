@@ -11,6 +11,7 @@ import random
 from scipy.io.wavfile import read as wavread
 from scipy.signal import spectrogram
 import matplotlib.pyplot as plt
+from keras.utils import to_categorical
 
 def make_spec_normalized(filename):   
     rate, data = wavread(filename)
@@ -50,7 +51,19 @@ def batch_generator(root_directory):
         spec_list = [next(gen) for gen in sub_gens]
         yield np.array(spec_list), np.array(classes)
         
-        
+
+def mini_batch_generator(path, batch_size):
+    gen = batch_generator(path)
+    while True:
+        batch_X = []
+        batch_Y = []
+        for i in range(batch_size):
+            X, Y = next(gen)
+            Y = to_categorical(Y)
+            batch_X.append(X)
+            batch_Y.append(Y)
+            
+        yield np.vstack(batch_X), np.vstack(batch_Y)        
     
     
     
