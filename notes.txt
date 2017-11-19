@@ -1,0 +1,24 @@
+#######################
+## FIRST SUBMISSIONS ## 
+
+sample submission achieves 0.09 accuracy, indicating that approximately 9% of the dataset is silence ~ 1/12
+
+first real submission with ~ 1/3 unknown yields 81% accuracy, indicating strong prior of unknown
+
+
+modified weighting of prior on weighting vector [-0.4,-0.4,-0.4,-0.4,-0.4,-0.4,-0.4,-0.4, 0.4,-0.4,-0.4,-0.4] 
+achieves accuracy of 0.72
+probably need to slightly weight the prior of silence as it is known that 9% of the data is silence
+
+modified weighting of prior on weighting vector [-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2, 0.2,-0.2,-0.2,-0.2]
+
+
+
+
+
+
+
+
+
+
+########################

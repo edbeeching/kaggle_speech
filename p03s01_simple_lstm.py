@@ -42,24 +42,33 @@ if __name__ == '__main__':
 
     counter = 0
     results_dict = {}
+    
+    weighter = np.array([-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2, 0.2,-0.2,-0.2,-0.2])
+
     while True:
         X, F = next(sub_gen)
         if X == None: break
         if counter % 1600 == 0:
             print(counter)
         preds = model.predict(X)    
-        maxes = np.argmax(preds,1)
+        maxes = np.argmax(preds - weighter,1)
         for file, pred in zip(F, maxes):
             results_dict[file] = pred
         counter += 32
 
     classes = ['left', 'up', 'down', 'no', 'right', 'on', 'yes', 'off', 'unknown', 'silence', 'stop', 'go']
     
-    submission_filename = 'submissions/p03s01_simple_lstm_20171119.csv'
+    submission_filename = 'submissions/p03s01_simple_lstm_20171119_4.csv'
     with open(submission_filename, 'w') as f:
         f.write('fname,label\n')
         for k,v in sorted(results_dict.items()):
             f.write('{},{}\n'.format(k, classes[v]))
         
-        
+#    cnt = []
+#    for k,v in sorted(results_dict.items()):
+#        cnt.append(classes[v])
+#
+#    from collections import Counter
+#    
+#    count = Counter(cnt)
     

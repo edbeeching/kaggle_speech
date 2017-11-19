@@ -12,6 +12,7 @@ from scipy.io.wavfile import read as wavread
 from scipy.signal import spectrogram
 import matplotlib.pyplot as plt
 from keras.utils import to_categorical
+from more_itertools import chunked
 
 def make_spec_normalized(filename):   
     rate, data = wavread(filename)
@@ -66,7 +67,19 @@ def mini_batch_generator(path, batch_size):
         yield np.vstack(batch_X), np.vstack(batch_Y)        
     
     
+def submission_data_generator(filepath, minibatch_size):
+    filenames = [f for f in os.listdir(filepath)]
     
+    data_chunks = list(chunked(filenames, minibatch_size))
+    
+    for chunk in data_chunks:
+        data = []
+        filenames = []
+        for file in chunk:
+            data.append(make_spec_normalized(filepath + file))
+            filenames.append(file)
+        yield np.array(data), filenames
+    yield None, None 
 
             
 
