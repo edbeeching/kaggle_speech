@@ -43,7 +43,7 @@ def data_generator(directory_path):
             yield spec
 
 def batch_generator(root_directory):
-    sub_directories = [d for d in os.listdir(root_directory)]
+    sub_directories = ['left', 'up', 'down', 'no', 'right', 'on', 'yes', 'off', 'unknown', 'silence', 'stop', 'go']
     classes = [v for v in range(len(sub_directories))]
     sub_gens = [data_generator(root_directory + sub_dir + '/') for sub_dir in sub_directories]
     
