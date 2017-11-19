@@ -13,7 +13,7 @@ script_name = 'p04j01_simple_lstm_argparse.py'
 with open('batcher.sh','w') as f:  
     for neuron in neurons:
         for reg in regs:
-            f.write('{} {} {}\n'.format(script_name, neuron, reg))
+            f.write('python3 {} {} {}\n'.format(script_name, neuron, reg))
         
         
 

@@ -43,12 +43,11 @@ if __name__ == '__main__':
 
     print('N={}, R={}'.format(NUM_NEURONS, REG))
 
-    exit()
     
     model = create_model((142,64), NUM_NEURONS, REG)
     
-    tensor_board = TensorBoard(log_dir = 'tensorboard/model_p04j01_simple_lstm_argparse_N{}_R{}/'.format(NUM_NEURONS, REG))
-    check_point = ModelCheckpoint(filepath='models/model_p04j01_simple_lstm_argparse_N{}_R{}/'.format(NUM_NEURONS, REG) +'.{epoch:02d}.hdf5', period=10)
+    tensor_board = TensorBoard(log_dir = 'tensorboard/model_p04j01_simple_lstm_argparse_N{}_R{}_'.format(NUM_NEURONS, REG))
+    check_point = ModelCheckpoint(filepath='models/model_p04j01_simple_lstm_argparse_N{}_R{}_'.format(NUM_NEURONS, REG) +'.{epoch:02d}.hdf5', period=10)
 
     
     train_generator = mini_batch_generator(TRAIN_PATH, 32)

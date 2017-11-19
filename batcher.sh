@@ -1,20 +1,20 @@
-p04j01_simple_lstm_argparse.py 64 0.0
-p04j01_simple_lstm_argparse.py 64 0.0001
-p04j01_simple_lstm_argparse.py 64 0.001
-p04j01_simple_lstm_argparse.py 64 0.01
-p04j01_simple_lstm_argparse.py 64 0.1
-p04j01_simple_lstm_argparse.py 128 0.0
-p04j01_simple_lstm_argparse.py 128 0.0001
-p04j01_simple_lstm_argparse.py 128 0.001
-p04j01_simple_lstm_argparse.py 128 0.01
-p04j01_simple_lstm_argparse.py 128 0.1
-p04j01_simple_lstm_argparse.py 256 0.0
-p04j01_simple_lstm_argparse.py 256 0.0001
-p04j01_simple_lstm_argparse.py 256 0.001
-p04j01_simple_lstm_argparse.py 256 0.01
-p04j01_simple_lstm_argparse.py 256 0.1
-p04j01_simple_lstm_argparse.py 512 0.0
-p04j01_simple_lstm_argparse.py 512 0.0001
-p04j01_simple_lstm_argparse.py 512 0.001
-p04j01_simple_lstm_argparse.py 512 0.01
-p04j01_simple_lstm_argparse.py 512 0.1
+python3 p04j01_simple_lstm_argparse.py 64 0.0
+python3 p04j01_simple_lstm_argparse.py 64 0.0001
+python3 p04j01_simple_lstm_argparse.py 64 0.001
+python3 p04j01_simple_lstm_argparse.py 64 0.01
+python3 p04j01_simple_lstm_argparse.py 64 0.1
+python3 p04j01_simple_lstm_argparse.py 128 0.0
+python3 p04j01_simple_lstm_argparse.py 128 0.0001
+python3 p04j01_simple_lstm_argparse.py 128 0.001
+python3 p04j01_simple_lstm_argparse.py 128 0.01
+python3 p04j01_simple_lstm_argparse.py 128 0.1
+python3 p04j01_simple_lstm_argparse.py 256 0.0
+python3 p04j01_simple_lstm_argparse.py 256 0.0001
+python3 p04j01_simple_lstm_argparse.py 256 0.001
+python3 p04j01_simple_lstm_argparse.py 256 0.01
+python3 p04j01_simple_lstm_argparse.py 256 0.1
+python3 p04j01_simple_lstm_argparse.py 512 0.0
+python3 p04j01_simple_lstm_argparse.py 512 0.0001
+python3 p04j01_simple_lstm_argparse.py 512 0.001
+python3 p04j01_simple_lstm_argparse.py 512 0.01
+python3 p04j01_simple_lstm_argparse.py 512 0.1
