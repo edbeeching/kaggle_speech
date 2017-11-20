@@ -11,8 +11,9 @@ import random
 from scipy.io.wavfile import read as wavread
 from scipy.signal import spectrogram
 import matplotlib.pyplot as plt
-from keras.utils import to_categorical
+from sklearn.preprocessing import OneHotEncoder
 from more_itertools import chunked
+from multiprocessing import Pool
 
 def make_spec_normalized(filename):   
     rate, data = wavread(filename)
@@ -43,24 +44,42 @@ def data_generator(directory_path):
             spec = make_spec_normalized(directory_path + file)
             yield spec
 
+def file_generator(directory_path):
+    # get list of file
+    # while loop that permutes the list and returns spectrogram from list
+    filenames = [f for f in os.listdir(directory_path)]
+    while True:
+        random.shuffle(filenames)
+        for file in filenames:
+            yield directory_path + file
+
 def batch_generator(root_directory):
     sub_directories = ['left', 'up', 'down', 'no', 'right', 'on', 'yes', 'off', 'unknown', 'silence', 'stop', 'go']
     classes = [v for v in range(len(sub_directories))]
-    sub_gens = [data_generator(root_directory + sub_dir + '/') for sub_dir in sub_directories]
+    sub_file_gens = [file_generator(root_directory + sub_dir + '/') for sub_dir in sub_directories]
+    
+    workers = Pool(12)
     
     while True:
-        spec_list = [next(gen) for gen in sub_gens]
+        file_list = [next(gen) for gen in sub_file_gens]
+        spec_list = workers.map(make_spec_normalized, file_list)
         yield np.array(spec_list), np.array(classes)
+    workers.close()
+    workers.join()
         
 
 def mini_batch_generator(path, batch_size):
+    a = np.array([0,1,2,3,4,5,6,7,8,9,10,11]).reshape(-1,1)
+    ohe = OneHotEncoder()
+    ohe.fit(a)
+    
     gen = batch_generator(path)
     while True:
         batch_X = []
         batch_Y = []
         for i in range(batch_size):
             X, Y = next(gen)
-            Y = to_categorical(Y)
+            Y = ohe.transform(Y.reshape(-1, 1)).toarray()
             batch_X.append(X)
             batch_Y.append(Y)
             
@@ -102,12 +121,17 @@ if __name__ == '__main__':
 #        plt.subplot(2,5,i)
 #        plt.imshow(sp)
     
-    gener = batch_generator('train/train_test/')
+    gener = mini_batch_generator('train/train_test/', 32)
     
     specs, classes = next(gener)
-    plt.figure()
-    for (sp, cl) in zip(specs, classes):
-        plt.subplot(3,4,cl+1)
-        plt.title(str(cl))
-        plt.imshow(sp)
-        
+#    plt.figure()
+#    for (sp, cl) in zip(specs, classes):
+#        plt.subplot(3,4,cl+1)
+#        plt.title(str(cl))
+#        plt.imshow(sp)
+#        
+
+    
+    
+    
+    

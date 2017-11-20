@@ -18,8 +18,8 @@ import argparse
 
 def create_model(input_shape, num_neurons=128, regul=0.0):
     model_input = Input(shape=(input_shape))
-    x = LSTM(128)(model_input)
-    model_output = Dense(12, activation='softmax')(x)
+    x = LSTM(num_neurons)(model_input)
+    model_output = Dense(12, kernel_regularizer=l2(regul), activation='softmax')(x)
     
     model = Model(model_input, model_output)
     model.summary()    
@@ -46,8 +46,8 @@ if __name__ == '__main__':
     
     model = create_model((142,64), NUM_NEURONS, REG)
     
-    tensor_board = TensorBoard(log_dir = 'tensorboard/model_p04j01_simple_lstm_argparse_N{}_R{}_'.format(NUM_NEURONS, REG))
-    check_point = ModelCheckpoint(filepath='models/model_p04j01_simple_lstm_argparse_N{}_R{}_'.format(NUM_NEURONS, REG) +'.{epoch:02d}.hdf5', period=10)
+    tensor_board = TensorBoard(log_dir = 'tensorboard/model_p04j01_simple_lstm_argparse_N{}_R{}'.format(NUM_NEURONS, REG))
+    check_point = ModelCheckpoint(filepath='models/model_p04j01_simple_lstm_argparse_N{}_R{}_'.format(NUM_NEURONS, REG) + '.{epoch:02d}.hdf5', period=10)
 
     
     train_generator = mini_batch_generator(TRAIN_PATH, 32)

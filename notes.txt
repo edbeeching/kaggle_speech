@@ -10,15 +10,29 @@ modified weighting of prior on weighting vector [-0.4,-0.4,-0.4,-0.4,-0.4,-0.4,-
 achieves accuracy of 0.72
 probably need to slightly weight the prior of silence as it is known that 9% of the data is silence
 
-modified weighting of prior on weighting vector [-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2, 0.2,-0.2,-0.2,-0.2]
+subtrcting weighting of prior on weighting vector [-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2,-0.2, 0.2,-0.2,-0.2,-0.2]
+achieves accuracy of 0.8
 
 
-
-
-
-
-
+sumbitting all unknowns achieves accuracy of 0.09 this is strange as many examples are unknown
 
 
 
 ########################
+## Batch of test 04j01
+64 neurons a reg of 0.0001 performs best
+128 neurons a reg of 0.0001 performs best
+256 neurons a reg of 0.0001 performs best
+512 neurons a reg of 0.0001 performs best
+
+comparing 64, 128, 256 and 512:
+    256 and 512 achieve similar performance
+    
+make submission with 256, accuracy is lower: 80%
+
+follow up with tests of reg = 0.00001 for the tests listed above
+
+Ideas:
+    Recurrent regularization
+    bi directionality
+    Preprocessing, make small adjustments
