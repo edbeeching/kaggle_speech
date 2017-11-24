@@ -36,3 +36,42 @@ Ideas:
     Recurrent regularization
     bi directionality
     Preprocessing, make small adjustments
+    
+#####
+## Submission with recurrent dropout of 0.3
+with        0.81
+without     0.80
+
+########
+## Next test to try
+
+1. Preproc in classifer
+2. Fully conv classifier
+
+#######
+## Fully conv classifer:
+    best result on validation is with reg=0.0001, drop = 0.4
+    should try training for longer, 20 epochs?
+    will try sumbitting for reg = 0.0 and reg=0.0001 both with drop 0.4
+    accuracy for 0.0 = 0.77
+    accuracy for 0.0001 = 0.80
+    
+    clearly a fully convolutional net has promise
+    
+######
+## Next to try:
+    1. train for longer - No real improvement, training with higher dropout and more regularisation
+    2. deeper?
+    3. Conv + LSTM?
+    4. preproc, frame size too small?
+    5. More simple model
+    
+######
+## Training for longer for with more regularization:
+    0.0001 with dropout of 0.8 appears to provide the best result
+
+
+
+
+
+

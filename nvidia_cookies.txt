@@ -1,0 +1,14 @@
+# Cookies for domains related to nvidia.com.
+# This content may be pasted into a cookies.txt file and used by wget
+# Example:  wget -x --load-cookies cookies.txt https://developer.nvidia.com/rdp/cudnn-download
+#
+.nvidia.com	TRUE	/	FALSE	1547569542	AMCV_F207D74D549850760A4C98C6%40AdobeOrg	-1330315163%7CMCIDTS%7C17182%7CMCMID%7C76674416907466989817034981324842427100%7CMCAID%7CNONE%7CMCOPTOUT-1484504742s%7CNONE
+www.nvidia.com	FALSE	/	FALSE	1532932329	ProductSeriesType	1
+www.nvidia.com	FALSE	/	FALSE	1532932329	ProductSeries	101
+www.nvidia.com	FALSE	/	FALSE	1532932329	ProductType	845
+www.nvidia.com	FALSE	/	FALSE	1532932329	OperatingSystem	12
+www.nvidia.com	FALSE	/	FALSE	1532932329	Language	1
+.nvidia.com	TRUE	/	FALSE	1534716000	__unam	4d8c667-159a2f15608-4267b358-14
+.developer.nvidia.com	TRUE	/	TRUE	1513183935.905729	SSESS2088448faf607a381892ca97487fa4c7	7mGjm6KKRQgjgL81_-DhCwamcjjxk1nIoDmL62XEcWI
+.developer.nvidia.com	TRUE	/	TRUE	1511270526.753659	webform-873453[1511184128]	1511184128
+developer.nvidia.com	FALSE	/	FALSE	0	has_js	1
