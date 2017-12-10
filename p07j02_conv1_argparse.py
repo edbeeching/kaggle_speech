@@ -14,6 +14,7 @@ import numpy as np
 import argparse
 import bcolz
 import os
+from sklearn.utils import class_weight
   
 
 def load_bcolz_data(filepath):  
@@ -62,7 +63,7 @@ if __name__ == '__main__':
 
     print('R={}, D={}, E={}, W={}'.format(REG, DROP, MAX_EPOCH, WEIGHTS))
     
-    from sklearn.utils import class_weight
+    
 
     
     BCOLZ_TRAIN_PATH = 'train/bcolz/train/'

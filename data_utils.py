@@ -8,6 +8,7 @@ Created on Sat Nov 18 10:27:55 2017
 import os 
 import numpy as np
 import random
+import bcolz
 from scipy.io.wavfile import read as wavread
 from scipy.signal import spectrogram
 import matplotlib.pyplot as plt
@@ -160,6 +161,41 @@ def time_series_mini_batch_generator(path, batch_size):
             batch_Y.append(Y)
         
         yield np.vstack(batch_X), np.vstack(batch_Y)     
+        
+    
+def class_batch_generator(filepath, cls, batch_size=32):
+
+    data = bcolz.carray(rootdir=filepath+'data')[:]
+    num_points = len(data)
+    num_splits = num_points // batch_size
+    print(cls, num_points)
+    while True:
+        np.random.shuffle(data)
+        for spec in np.array_split(data, num_splits):
+            yield spec, np.repeat(cls, len(spec))
+    
+    
+def balanced_batch_generator(base_filepath, batch_size=32):
+    classes = ['left', 'up', 'down', 'no', 'right', 'on', 'yes', 'off', 'unknown', 'silence', 'stop', 'go']
+    gens = [class_batch_generator(base_filepath + name +'/', cls, batch_size) for cls, name in enumerate(classes) ]
+    a = np.array([0,1,2,3,4,5,6,7,8,9,10,11]).reshape(-1,1)
+    ohe = OneHotEncoder()
+    ohe.fit(a)
+    while True:
+        batch_x = []
+        batch_y = []
+        
+
+        for gen in gens:
+            X, Y = next(gen)
+            batch_x.append(X)
+            batch_y.append(Y)
+        
+        yield np.vstack(batch_x), ohe.transform(np.hstack(batch_y).reshape(-1, 1)).toarray()
+        
+#        ohe.transform(Y.reshape(-1, 1)).toarray()
+    
+    
     
 if __name__ == '__main__':
 
@@ -175,6 +211,14 @@ if __name__ == '__main__':
     
     vv = np.hstack([tt2[0],tt3[0]])
     
+    gen = class_batch_generator('train/bcolz_separate/train/' +'left/' , 0, 256)
+    gen2 = class_batch_generator('train/bcolz_separate/train/' +'right/' , 1, 256)
     
     
+    x,y = next(gen)
+    x2, y2 = next(gen2)
 
+    batch_gen = balanced_batch_generator('train/bcolz_separate/train/', batch_size=32)
+
+
+    x,y = next(batch_gen)

@@ -65,10 +65,42 @@ without     0.80
     3. Conv + LSTM?
     4. preproc, frame size too small?
     5. More simple model
+    6. data augmentation
     
 ######
 ## Training for longer for with more regularization:
-    0.0001 with dropout of 0.8 appears to provide the best result
+    0.0001 with dropout of 0.8 appears to provide the best result, after submission with class weights, score = 0.77
+
+######
+## Try the smallest network possible, as there is not much data
+
+######
+## Smallest network with 
+
+    model_input= Input(shape=input_shape)
+    x = Conv2D(16, kernel_size=(3,3), activation='relu')(model_input)
+    x = MaxPool2D(pool_size=(2,2))(x)
+    x = Conv2D(32, kernel_size=(3,3), activation='relu')(x)
+    x = MaxPool2D(pool_size=(2,2))(x)
+    x = Conv2D(64, kernel_size=(3,3), activation='relu')(x)
+    x = MaxPool2D(pool_size=(2,2))(x)
+    x = Conv2D(32, kernel_size=(1,6),activation='relu')(x)
+    x = Flatten()(x)
+    x = Dropout(drop)(x)
+    model_output = Dense(12, activation='softmax', kernel_regularizer=l2(reg))(x)
+    
+10 randomly selected tests:
+best on valid is :     reg=0.0001 drop=0.4 weights=False    with 0.924 accuracy on validation set
+
+#####
+## slightly less small network have best parameters:
+    reg 0.001, drop 0.8 wieghts = True  with 0.9059 accuracy on valdation set
+
+#####
+## next is small conv net + LSTM
+best result is with reg = 0.0 drop = 0.8
+
+
 
 
 
